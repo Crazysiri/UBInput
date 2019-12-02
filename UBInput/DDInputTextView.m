@@ -29,12 +29,21 @@
     return self;
 }
 
-- (void)textDidChange:(NSNotification *)noti {
+- (void)setText:(NSString *)text {
+    [super setText:text];
+    [self showOrHideLabel];
+}
+
+- (void)showOrHideLabel {
     BOOL hidden = self.text.length == 0 ? NO : YES;
     
     if (_placeholderLabel.hidden != hidden) {
         _placeholderLabel.hidden = hidden;
     }
+}
+
+- (void)textDidChange:(NSNotification *)noti {
+    [self showOrHideLabel];
 }
 
 - (UILabel *)placeholderLabel {
