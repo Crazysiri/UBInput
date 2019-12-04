@@ -24,7 +24,7 @@
     
     if (self) {
         self.placeholderLabel.hidden = NO;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextViewTextDidChangeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textDidChange:) name:UITextViewTextDidChangeNotification object:self];
     }
     return self;
 }
@@ -43,7 +43,9 @@
 }
 
 - (void)textDidChange:(NSNotification *)noti {
-    [self showOrHideLabel];
+    if (noti.object == self) {
+        [self showOrHideLabel];
+    }
 }
 
 - (UILabel *)placeholderLabel {
